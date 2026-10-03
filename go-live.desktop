@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Go Live
+Exec=/home/arch/Aplicativos/Go-Live-1.0.11.AppImage
+Icon=go-live
+Type=Application
+Categories=Utility;
+Terminal=false
+StartupNotify=true
