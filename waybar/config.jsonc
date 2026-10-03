@@ -1,0 +1,138 @@
+// Tema Waybar: Preto + Azul escuro pastel
+// Esta configuração não altera hyprpaper.conf nem scripts de wallpaper.
+{
+  "layer": "top",
+  "position": "bottom",
+  "height": 36,
+  "spacing": 0,
+  "margin-bottom": 0,
+  "margin-left": 0,
+  "margin-right": 0,
+
+  "modules-left": [
+    "hyprland/workspaces"
+  ],
+  "modules-center": [
+    "custom/spotify-launcher",
+    "mpris"
+  ],
+  "modules-right": [
+    "tray",
+    "network",
+    "pulseaudio",
+    "battery",
+    "clock"
+  ],
+
+  "hyprland/workspaces": {
+    "disable-scroll": false,
+    "all-outputs": false,
+    "format": "{icon}",
+    "format-icons": {
+      "1": "<span size=\"x-large\"></span>",
+      "2": "<span size=\"x-large\"></span>",
+      "3": "<span size=\"x-large\"></span>",
+      "4": "<span size=\"x-large\"></span>",
+      "5": "<span size=\"x-large\"></span>",
+      "active": "<span size=\"x-large\"></span>",
+      "urgent": "<span size=\"x-large\"></span>",
+      "default": "<span size=\"x-large\"></span>"
+    },
+    "persistent-workspaces": {
+      "*": 5
+    }
+  },
+
+  "custom/spotify-launcher": {
+    "format": "<span size=\"x-large\"></span>",
+    "tooltip": true,
+    "tooltip-format": "Abrir Spotify",
+    "on-click": "spotify-launcher"
+  },
+
+  "mpris": {
+    "player": "spotify",
+    "format": "{player_icon} {dynamic}",
+    "format-paused": "{status_icon} {dynamic}",
+    "format-stopped": "{status_icon} {dynamic}",
+    "player-icons": {
+      "spotify": "<span size=\"x-large\"></span>",
+      "default": "<span size=\"x-large\"></span>"
+    },
+    "status-icons": {
+      "playing": "<span size=\"x-large\"></span>",
+      "paused": "<span size=\"x-large\"></span>",
+      "stopped": "<span size=\"x-large\"></span>"
+    },
+    "artist-len": 18,
+    "title-len": 34,
+    "dynamic-len": 54,
+    "dynamic-order": ["artist", "title"],
+    "max-length": 60,
+    "tooltip": true,
+    "tooltip-format": "{player} — {status}\n{artist} — {title}\nÁlbum: {album}",
+    "on-click": "playerctl --player=spotify play-pause",
+    "on-click-middle": "playerctl --player=spotify previous",
+    "on-click-right": "playerctl --player=spotify next"
+  },
+
+  "tray": {
+    "icon-size": 22,
+    "spacing": 6,
+    "show-passive-items": true,
+    "reverse-direction": true
+  },
+
+  "network": {
+    "format-wifi": "<span size=\"x-large\">󰤨</span>  {signalStrength}%",
+    "format-ethernet": "<span size=\"x-large\">󰈀</span>  LAN",
+    "format-linked": "<span size=\"x-large\">󰤮</span>  sem IP",
+    "format-disconnected": "<span size=\"x-large\">󰤭</span>  offline",
+    "tooltip-format": "{ifname}: {essid}\nIP: {ipaddr}\nGateway: {gwaddr}",
+    "tooltip-format-wifi": "{ifname}: {essid}\nSinal: {signalStrength}%\nIP: {ipaddr}",
+    "tooltip-format-ethernet": "{ifname}\nIP: {ipaddr}"
+  },
+
+  "pulseaudio": {
+    "format": "{volume}% <span size=\"x-large\">{icon}</span>",
+    "format-bluetooth": "{volume}% <span size=\"x-large\">{icon} </span>",
+    "format-muted": "<span size=\"x-large\">󰝟</span>  muted",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "󰂑",
+      "headset": "󰂑",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
+    },
+    "scroll-step": 5,
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+    "tooltip-format": "Saída: {desc}\nVolume: {volume}%"
+  },
+
+  "battery": {
+    "bat": "BAT1",
+    "adapter": "ACAD",
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}% <span size=\"x-large\">{icon}</span>",
+    "format-charging": "{capacity}% <span size=\"x-large\">󰂄</span>",
+    "format-plugged": "{capacity}% <span size=\"x-large\">󰚥</span>",
+    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "tooltip-format": "Bateria: {capacity}%\nTempo: {time}"
+  },
+
+  "clock": {
+    "format": "{:%H:%M %a %d/%m/%Y}",
+    "tooltip-format": false
+  }
+}
+
+// O formato principal do relógio é: dia-da-semana/mês/dia/horas/minutos.
+// Exemplo: ter/ago/19/14/05 — os nomes seguem o locale do sistema.
+// O módulo de bateria está fixado no dispositivo BAT1 e no adaptador ACAD.

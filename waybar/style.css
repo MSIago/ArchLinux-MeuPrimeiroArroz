@@ -1,0 +1,189 @@
+/*
+ * Waybar — Preto + Azul escuro pastel
+ * Transparente, quadrado e minimalista
+ * A posição inferior é definida em config.jsonc.
+ */
+
+@define-color bg        rgba(8, 12, 20, 0.82);
+@define-color bg-solid  #080c14;
+@define-color panel     rgba(18, 28, 45, 0.86);
+@define-color panel-alt rgba(28, 43, 66, 0.78);
+@define-color blue      #8faecc;
+@define-color blue-soft #a9c3df;
+@define-color blue-dim  #607995;
+@define-color text      #d8e4f0;
+@define-color muted     #7f93aa;
+@define-color urgent    #d58c9a;
+@define-color border    rgba(143, 174, 204, 0.32);
+
+* {
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  font-family: "JetBrainsMono Nerd Font Mono", "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+window#waybar {
+  background: transparent;
+  color: @text;
+}
+
+/* Sem margens: os blocos ficam unidos e a barra toca as laterais da tela. */
+#workspaces,
+#mpris,
+#custom-spotify-launcher,
+#tray,
+#network,
+#pulseaudio,
+#battery,
+#clock {
+  background: @bg;
+  border: 1px solid @border;
+  margin: 0;
+  padding: 0 11px;
+}
+
+#workspaces {
+  padding: 0;
+  background: @panel;
+}
+
+#workspaces button {
+  color: @muted;
+  background: transparent;
+  padding: 0 11px;
+  margin: 0;
+  border-bottom: 2px solid transparent;
+  transition: all 160ms ease;
+}
+
+#workspaces button:hover {
+  color: @blue-soft;
+  background: @panel-alt;
+}
+
+#workspaces button.active {
+  color: @blue-soft;
+  background: rgba(61, 91, 122, 0.42);
+  border-bottom: 2px solid @blue;
+}
+
+#workspaces button.urgent {
+  color: @urgent;
+  background: rgba(110, 52, 66, 0.4);
+}
+
+#custom-spotify-launcher {
+  color: @blue-soft;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+#custom-spotify-launcher:hover,
+#mpris:hover {
+  color: @blue-soft;
+  background: @panel-alt;
+  border-color: rgba(169, 195, 223, 0.5);
+}
+
+#mpris {
+  color: @text;
+  background: rgba(8, 12, 20, 0.68);
+  border-color: rgba(143, 174, 204, 0.2);
+  font-weight: 500;
+  min-width: 150px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+#mpris.playing {
+  color: @blue-soft;
+}
+
+#mpris.paused,
+#mpris.stopped {
+  color: @muted;
+}
+
+#tray {
+  padding-left: 10px;
+  padding-right: 10px;
+  min-width: 22px;
+}
+
+#tray image {
+  -gtk-icon-transform: scale(1.12);
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+}
+
+#tray:hover,
+#network:hover,
+#pulseaudio:hover,
+#battery:hover,
+#clock:hover {
+  color: @blue-soft;
+  background: @panel-alt;
+  border-color: rgba(169, 195, 223, 0.5);
+}
+
+#network,
+#pulseaudio,
+#battery,
+#clock {
+  color: @text;
+}
+
+#network.disconnected,
+#pulseaudio.muted {
+  color: @muted;
+}
+
+#battery.warning {
+  color: @blue-soft;
+  border-color: rgba(169, 195, 223, 0.62);
+}
+
+#battery.critical:not(.charging) {
+  color: @urgent;
+  border-color: rgba(213, 140, 154, 0.68);
+}
+
+#clock {
+  color: @blue-soft;
+  min-width: 116px;
+}
+
+tooltip {
+  background: @bg-solid;
+  border: 1px solid @border;
+  color: @text;
+}
+
+tooltip label {
+  color: @text;
+  padding: 5px;
+}
+
+@keyframes blink {
+  to {
+    color: @urgent;
+    background: rgba(110, 52, 66, 0.4);
+  }
+}
+
+#battery.critical:not(.charging) {
+  animation-name: blink;
+  animation-duration: 0.8s;
+  animation-timing-function: steps(12);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
