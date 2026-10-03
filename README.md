@@ -19,13 +19,11 @@ Configuração pessoal do Hyprland para Arch Linux: config em Lua, `hyprpaper`, 
 │       ├── wallpaper-changer.sh
 │       └── opacity-per-monitor.sh
 ├── waybar/
-│   ├── config.jsonc      <- adicione sua própria config aqui
-│   └── style.css         <- adicione sua própria config aqui
+│   ├── config.jsonc
+│   └── style.css
 └── applications/
     └── go-live.desktop
 ```
-
-> A pasta `waybar/` está vazia neste repositório — ela não fazia parte do que configuramos até agora. Coloque seu `config.jsonc`/`style.css` ali antes de rodar o instalador, ou apague a seção correspondente do `install.sh` se não for usá-la.
 
 ## Pré-requisitos
 
